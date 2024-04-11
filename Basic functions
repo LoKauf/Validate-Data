@@ -1,0 +1,14 @@
+# Erstelle Daten
+set.seed(123)
+
+data <- data.frame(
+  age = round(runif(100, -1, 67), 0), # Alter
+  sleep = round(rtruncnorm(100, a = 4, mean = 7, sd = 3), 1) # Schlafstunden pro Nacht
+)
+
+# Kategorie basierend auf dem Alter
+data$age_cat <- ifelse(data$age < 18, "Kind",
+                       ifelse(data$age <= 65, "Erwachsener", "Rentner"))
+# Füge einige NA-Werte ein
+na_indices <- sample(1:nrow(data), 5) 
+data$sleep[na_indices] <- NA # Setze zufällige Schlafstunden auf NA
